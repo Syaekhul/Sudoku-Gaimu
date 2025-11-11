@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- PWA Meta Tags -->
+  <meta name="description"
+    content="Play Sudoku offline with multiple difficulty levels. Track your best times and improve your skills!" />
+  <meta name="theme-color" content="#4F46E5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Sudoku Gaimu" />
+
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/pwa-192x192.png" />
+
+  <title>Sudoku Gaimu - Play Anytime, Anywhere</title>
+
+  <!-- ✅ ADD: Loading Splash Screen -->
+  <style>
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      transition: opacity 0.3s;
+    }
+
+    #splash.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-logo {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      font-weight: bold;
+      color: #4F46E5;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    .splash-text {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 24px;
+      font-family: Arial, sans-serif;
+    }
+
+    .splash-loading {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      margin-top: 16px;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ✅ ADD: Splash Screen -->
+  <div id="splash">
+    <div class="splash-logo">S</div>
+    <div class="splash-text">Sudoku Gaimu</div>
+    <div class="splash-loading">Loading...</div>
+  </div>
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- ✅ ADD: Hide splash when loaded -->
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('splash').classList.add('hide');
+        setTimeout(() => {
+          document.getElementById('splash').remove();
+        }, 300);
+      }, 500);
+    });
+  </script>
+</body>
+
+</html>
